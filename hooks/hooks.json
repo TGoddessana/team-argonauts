@@ -1,0 +1,13 @@
+{
+  "hooks": [
+    {
+      "matcher": "Stop",
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Check if .claude/team-argonauts.local.md exists in the project. If it exists, read the 'auto_review' setting from its YAML frontmatter.\n\nIf auto_review is 'suggest' (default) or 'auto':\n- Look at what was just completed in this session\n- If significant code was written or modified (not just reading/exploring):\n  - If auto_review is 'suggest': Add a brief note suggesting '/team-argonauts:review' for production readiness review\n  - If auto_review is 'auto': Automatically run a quick review with relevant Argonauts (based on file types modified)\n\nIf auto_review is 'off' or the setting doesn't exist: Do nothing.\n\nKeep any suggestion brief - just one line like:\n'Tip: Run /team-argonauts:review for a production-readiness check by the Argonauts team.'"
+        }
+      ]
+    }
+  ]
+}
