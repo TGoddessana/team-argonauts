@@ -2,20 +2,19 @@
 
 > FAANG-level senior engineers reviewing your code for production readiness.
 
-**Team Argonauts** is a Claude Code plugin that provides expert code review from 8 specialized AI agents, each embodying a senior engineer with deep domain expertise. Like the mythical Argonauts who sailed with Jason, this team navigates the complexities of production-ready code.
+**Team Argonauts** is a Claude Code plugin that provides expert code review from 7 specialized AI agents, each embodying a senior engineer with deep domain expertise. Like the mythical Argonauts who sailed with Jason, this team navigates the complexities of production-ready code.
 
 ## The Team
 
 | Agent | Role | Expertise |
 |-------|------|-----------|
-| 🏛️ **Jason** | Tech Lead / Architect | Architecture decisions, trade-offs, design direction |
-| 💪 **Heracles** | Backend Engineer | API design, scalability, fault tolerance |
-| 🔨 **Hephaestus** | DevOps / SRE | Deployment, CI/CD, monitoring, infrastructure |
-| 🏥 **Asclepius** | QA Engineer | Test coverage, edge cases, quality standards |
+| 🏛️ **Jason** | Tech Lead / Architect | Architecture decisions, orchestration, trade-off analysis |
+| 💪 **Heracles** | Backend Engineer | API design, scalability, fault tolerance, data modeling |
 | 🎵 **Orpheus** | Frontend Engineer | UX, performance, accessibility, state management |
-| 👁️ **Argus** | Security Engineer | Vulnerabilities, auth, injection, data protection |
-| 🦉 **Athena** | DBA / Data Engineer | Query optimization, schema design, indexing |
-| 📝 **Calliope** | Technical Writer | Documentation, naming, code clarity |
+| ⚓ **Argus** | DevOps / SRE | Deployment, CI/CD, monitoring, infrastructure |
+| 👁️ **Lynceus** | Security Engineer | Vulnerabilities, auth, threat modeling, data protection |
+| 🏹 **Atalanta** | QA Engineer | Test coverage, edge cases, quality standards, bug hunting |
+| 📝 **Calliope** | Technical Writer | Documentation, naming, code clarity, API docs |
 
 ## Philosophy
 
@@ -54,9 +53,21 @@ Run a comprehensive review with all relevant team members:
 Select specific experts for focused review:
 
 ```
-/team-argonauts:review-with argus           # Security-focused review
-/team-argonauts:review-with heracles,athena # Backend + Database review
-/team-argonauts:review-with jason src/      # Architecture review of src/
+/team-argonauts:review-with lynceus              # Security-focused review
+/team-argonauts:review-with heracles,lynceus     # Backend + Security review
+/team-argonauts:review-with jason src/           # Architecture review of src/
+/team-argonauts:review-with orpheus src/components # Frontend review
+```
+
+### Quick Access Commands
+
+Direct access to specific reviewers:
+
+```
+/team-argonauts:security-review      # Quick security check with Lynceus
+/team-argonauts:backend-review       # Backend review with Heracles
+/team-argonauts:frontend-review      # Frontend review with Orpheus
+/team-argonauts:architecture-review  # Architecture review with Jason
 ```
 
 ### Natural Language
@@ -64,9 +75,9 @@ Select specific experts for focused review:
 The agents also trigger naturally in conversation:
 
 - "Is this API design scalable?" → Heracles
-- "Review this authentication flow" → Argus
-- "What edge cases am I missing?" → Asclepius
-- "Is this query efficient?" → Athena
+- "Review this authentication flow" → Lynceus
+- "What edge cases am I missing?" → Atalanta
+- "Is this component accessible?" → Orpheus
 
 ## Severity Levels (P0-P4)
 
@@ -123,7 +134,7 @@ Any project-specific notes for reviewers...
 
 ---
 
-## 👁️ Argus (Security)
+## 👁️ Lynceus (Security Engineer)
 
 ### P0: SQL Injection Vulnerability
 **Location:** `src/api/users.ts:45`

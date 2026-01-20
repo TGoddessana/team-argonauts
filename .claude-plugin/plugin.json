@@ -1,10 +1,29 @@
 {
   "name": "team-argonauts",
   "version": "0.1.0",
-  "description": "FAANG급 시니어 엔지니어 팀의 프로덕션 레디 코드 리뷰. 아르고 원정대원들이 장애 시나리오, 확장성 병목, 숨겨진 엣지 케이스, 운영 복잡성을 검토합니다.",
+  "description": "Production-ready code review by a team of FAANG-level senior engineers. Argo expedition members examine failure scenarios, scalability bottlenecks, hidden edge cases, and operational complexity.",
   "author": {
     "name": "Team Argonauts",
     "email": "team-argonauts@example.com"
   },
-  "keywords": ["code-review", "production-ready", "senior-engineer", "best-practices"]
+  "license": "MIT",
+  "homepage": "https://github.com/tgoddessana/team-argonauts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tgoddessana/team-argonauts.git"
+  },
+  "keywords": [
+    "code-review",
+    "production-ready",
+    "senior-engineer",
+    "best-practices",
+    "faang",
+    "architecture",
+    "security",
+    "devops",
+    "qa"
+  ],
+  "engines": {
+    "claude-code": ">=0.1.0"
+  }
 }
