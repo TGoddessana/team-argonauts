@@ -9,6 +9,8 @@ allowed-tools: ["Read", "Grep", "Glob", "Task", "AskUserQuestion", "Write", "Tod
 
 Execute complete workflow from code review to implementation, one issue at a time with clean context.
 
+**🤖 AUTOMATED WORKFLOW:** Steps 1-3 (Review → Plan → Summary) run automatically without user input. User approval is requested only at Step 4 before implementation begins.
+
 ## Philosophy
 
 **Simple > Complex**
@@ -22,16 +24,16 @@ Execute complete workflow from code review to implementation, one issue at a tim
 
 ```
 User Input: "backend security issues"
-  ↓
+  ↓ (AUTOMATIC - no user input needed)
 1. Execute /smart-review "backend security issues"
    → BACKEND_REVIEW_2026-01-20.md
-  ↓
+  ↓ (AUTOMATIC - no user input needed)
 2. Execute /smart-plan BACKEND_REVIEW_2026-01-20.md
    → plans/p0-1-*.md, p0-2-*.md, ... (13 files)
-  ↓
+  ↓ (AUTOMATIC - no user input needed)
 3. Show summary to user
    → "Found 5 P0 and 8 P1 issues"
-  ↓
+  ↓ (FIRST USER INTERACTION)
 4. Ask: "Execute issues one by one?"
    → [Yes] [Customize] [No]
   ↓
@@ -343,6 +345,8 @@ Resume from P0-4: Sync File Parsing?
 
 ## Instructions
 
+**CRITICAL: This is an AUTOMATED workflow. Execute ALL steps sequentially WITHOUT waiting for user input between steps.**
+
 ### Step 1: Execute Review
 
 ```markdown
@@ -352,23 +356,29 @@ Invoke Skill tool:
 
 Wait for completion.
 Store result filename: REVIEW_REPORT_DATE.md
+
+IMPORTANT: After smart-review completes, DO NOT stop or ask the user what to do next.
+Immediately proceed to Step 2.
 ```
 
 ### Step 2: Execute Planning
 
 ```markdown
-Invoke Skill tool:
+IMMEDIATELY after Step 1 completes, invoke Skill tool:
   skill: "smart-plan"
-  args: <review report filename>
+  args: <review report filename from Step 1>
 
 Wait for completion.
 Verify plans/ directory created.
+
+IMPORTANT: After smart-plan completes, DO NOT stop.
+Immediately proceed to Step 3.
 ```
 
 ### Step 3: Read All Plan Files
 
 ```markdown
-Use Glob to find all plan files:
+IMMEDIATELY after Step 2 completes, use Glob to find all plan files:
   pattern: "plans/*.plan.md"
 
 For each file:
@@ -378,11 +388,15 @@ For each file:
 
 Sort by priority (P0 first, then P1, then P2)
 Within priority, sort by number (p0-1 before p0-2)
+
+IMPORTANT: After reading all plan files, immediately proceed to Step 4.
 ```
 
 ### Step 4: Show Summary and Get Approval
 
 ```markdown
+NOW you can present a summary to the user and wait for their decision:
+
 Present summary to user:
   - Total issues
   - Breakdown by priority
