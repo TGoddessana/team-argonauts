@@ -1,6 +1,6 @@
 {
   "name": "team-argonauts",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Production-ready code review by a team of FAANG-level senior engineers. Argo expedition members examine failure scenarios, scalability bottlenecks, hidden edge cases, and operational complexity.",
   "author": {
     "name": "Team Argonauts",
