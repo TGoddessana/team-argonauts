@@ -139,13 +139,38 @@ Use AskUserQuestion:
     - "Stop workflow"
 ```
 
-#### Step 4.2: Launch Clean Agent
+#### Step 4.2: Select Expert Agent & Launch
+
+**IMPORTANT: Choose the RIGHT expert agent for each issue type**
 
 ```markdown
-Use Task tool to launch NEW agent:
+Step A: Read plan file and extract category
+  Read plans/p0-1-sql-injection.plan.md
+  Extract: **Category:** Security - SQL Injection
+
+Step B: Map category to expert agent
+
+Agent Selection Rules:
+  - Security, Authentication, Injection, CSRF, XSS → "lynceus"
+  - Performance, N+1 Query, Scalability, Backend → "heracles"
+  - Architecture, Design, Refactoring → "jason"
+  - Infrastructure, DevOps, Docker, K8s → "argus"
+  - Testing, QA, Race Conditions → "atalanta"
+  - Frontend, UI, Components → "orpheus"
+  - Unknown/General → "general-purpose"
+
+Category Matching Examples:
+  "Security - SQL Injection" → lynceus
+  "Performance" → heracles
+  "Architecture" → jason
+  "Scalability" → heracles
+  "Security - CSRF" → lynceus
+  "Concurrency" → atalanta
+
+Step C: Launch expert agent
 
 <Task>
-  subagent_type: "general-purpose"
+  subagent_type: <selected-expert-agent>  # e.g., "lynceus" for security
   description: "Fix P0-1 SQL Injection"
   prompt: "You are implementing a single fix from a plan file.
 
@@ -163,6 +188,7 @@ Use Task tool to launch NEW agent:
   - Focus ONLY on this single issue
   - Do NOT modify files not mentioned in the plan
   - If the plan references other issues, ignore them
+  - Apply your domain expertise (security/performance/architecture)
   - Return a summary when done
 
   Return format:
@@ -174,11 +200,12 @@ Use Task tool to launch NEW agent:
 </Task>
 ```
 
-**Why New Agent:**
-- ✅ Clean context (no contamination from previous issues)
-- ✅ Token efficient (doesn't carry previous conversation)
-- ✅ Isolated execution (one issue at a time)
-- ✅ Predictable behavior (same starting point each time)
+**Why Expert Agents:**
+- ✅ Domain expertise (Lynceus knows security best practices)
+- ✅ Better implementation quality (specialists > generalists)
+- ✅ Appropriate test coverage (experts know what to test)
+- ✅ Clean context per issue (still maintained)
+- ✅ Predictable behavior (same expert, same baseline)
 
 #### Step 4.3: Review Agent Result
 
@@ -380,11 +407,33 @@ For each selected issue:
      → If No/Skip: continue to next
      → If Stop: exit workflow
 
-  B. Launch new agent:
-     Use Task tool with:
-       - Clean context (new agent)
-       - Prompt: Read plan, implement, test, return result
-       - DO NOT commit
+  B. Select expert agent and launch:
+
+     B1. Read plan file and extract category:
+         plan_content = Read(plan_file)
+         category = extract_category(plan_content)
+         # Example: "**Category:** Security - SQL Injection"
+
+     B2. Map category to expert agent:
+         agent_mapping = {
+             "security|authentication|injection|csrf|xss": "lynceus",
+             "performance|scalability|backend|n\+1": "heracles",
+             "architecture|design|refactoring": "jason",
+             "infrastructure|devops|docker|k8s": "argus",
+             "testing|qa|race|concurrency": "atalanta",
+             "frontend|ui|component": "orpheus",
+         }
+
+         selected_agent = match_category(category, agent_mapping)
+         if not selected_agent:
+             selected_agent = "general-purpose"
+
+     B3. Launch expert agent:
+         Use Task tool with:
+           - subagent_type: selected_agent (e.g., "lynceus")
+           - Clean context (new agent)
+           - Prompt: Read plan, implement, test, return result
+           - DO NOT commit
 
   C. Receive result from agent
      - Parse modified files

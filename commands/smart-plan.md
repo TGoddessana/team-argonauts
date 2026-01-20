@@ -72,6 +72,7 @@ Examples:
 
 **Priority:** P0/P1/P2
 **Category:** [Security/Performance/Architecture/etc]
+**Recommended Agent:** [lynceus/heracles/jason/argus/atalanta/orpheus]
 **Estimated Effort:** [hours/days]
 **Status:** 🔴 Not Started
 
@@ -115,6 +116,29 @@ Examples:
 
 [Any additional context from review]
 ```
+
+**Recommended Agent Selection:**
+
+Map issue category to the most appropriate Team Argonauts expert:
+
+| Category Pattern | Recommended Agent | Expertise |
+|-----------------|-------------------|-----------|
+| Security, Authentication, Injection, CSRF, XSS, Crypto | **lynceus** | Security vulnerabilities, OWASP Top 10 |
+| Performance, N+1 Query, Scalability, Backend, Database | **heracles** | Backend optimization, query tuning |
+| Architecture, Design, Refactoring, Patterns | **jason** | System design, tech lead decisions |
+| Infrastructure, DevOps, Docker, K8s, Deployment | **argus** | Infrastructure, deployment, monitoring |
+| Testing, QA, Race Conditions, Concurrency | **atalanta** | Test coverage, edge cases |
+| Frontend, UI, Components, UX | **orpheus** | Frontend architecture, user experience |
+| Documentation, API Docs | **calliope** | Technical writing |
+| Unknown/General | **general-purpose** | Fallback for uncategorized issues |
+
+**Examples:**
+- "Security - SQL Injection" → lynceus
+- "Performance" → heracles
+- "Architecture Flaw" → jason
+- "Security - CSRF" → lynceus
+- "N+1 Query" → heracles
+- "Race Condition" → atalanta
 
 ### Phase 3: Create Summary Tracking File
 
