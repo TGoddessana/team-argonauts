@@ -82,6 +82,29 @@ Direct access to specific reviewers:
 /team-argonauts:architecture-review  # Architecture review with Jason
 ```
 
+### Smart Review (Recommended)
+
+**NEW:** Let AI automatically find relevant files and select reviewers:
+
+```
+/team-argonauts:smart-review "backend only"
+/team-argonauts:smart-review "security critical files"
+/team-argonauts:smart-review "frontend components"
+/team-argonauts:smart-review "deployment configs"
+```
+
+**How it works:**
+1. 🔍 Uses Explore agent to intelligently find files matching your description
+2. 🧠 Analyzes discovered files to determine appropriate reviewers
+3. 👥 Automatically selects expert team members
+4. ✅ Executes parallel review and generates consolidated report
+
+**Benefits:**
+- No need to specify exact file paths
+- No need to manually choose reviewers
+- Adapts to any project structure
+- Works with natural language
+
 ### Natural Language
 
 The agents also trigger naturally in conversation:
