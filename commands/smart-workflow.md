@@ -47,34 +47,78 @@ AskUserQuestion:
     - "All P0 + P1"
     - "Custom selection"
     - "None (manual)"
+
+After user selects:
+  - If "None": Stop workflow
+  - Otherwise: IMMEDIATELY proceed to Step 5 with selected issues
 ```
 
 ### 5. Sequential Execution
 
-For each selected issue:
+**IMPORTANT: Execute this step IMMEDIATELY after user makes selection in Step 4.**
+
+For each selected issue (in priority order: P0-1, P0-2, ..., P1-1, P1-2, ...):
 
 ```
-A. Confirm: "Execute [issue]?" → Yes/Skip/Stop
+A. Ask user confirmation:
+   AskUserQuestion:
+     "Execute [issue-title] (~Xh estimated)?"
+     Options: "Execute now" / "Skip this" / "Stop workflow"
 
-B. Read plan file, extract category
+   If "Skip": continue to next issue
+   If "Stop": end workflow
+   If "Execute": proceed to B
 
-C. Map category to agent:
-   - Security/Auth/Injection → lynceus
-   - Performance/Scalability → heracles
-   - Architecture/Design → jason
-   - Infrastructure/DevOps → argus
-   - Testing/QA → atalanta
-   - Frontend/UI → orpheus
-   - Unknown → general-purpose
+B. Read plan file:
+   Read plans/pX-Y-slug.plan.md
+   Extract: **Category:** field
 
-D. Launch agent:
-   Task tool with:
-     - subagent_type: <selected agent>
-     - prompt: "Read <plan_file>, implement fix, add tests, verify"
+C. Map category to expert agent:
+   Category pattern → Agent:
+     - "Security", "Auth", "Injection" → lynceus
+     - "Performance", "Scalability", "N+1" → heracles
+     - "Architecture", "Design" → jason
+     - "Infrastructure", "DevOps", "Docker" → argus
+     - "Testing", "QA", "Race" → atalanta
+     - "Frontend", "UI", "Component" → orpheus
+     - Unknown/other → general-purpose
 
-E. Review result, ask: "Create commit?" → Yes/No
+D. Launch expert agent (Task tool):
+   Task:
+     subagent_type: <agent from step C>
+     description: "Implement [issue-title]"
+     prompt: "You are implementing a fix from a plan file.
 
-F. Update progress, ask: "Continue?" → Yes/Pause/Stop
+             1. Read the plan: plans/pX-Y-slug.plan.md
+             2. Read all files in 'Files Affected' section
+             3. Implement the fix in 'Solution' section
+             4. Follow 'Implementation Steps' checklist
+             5. Add tests from 'Verification Criteria'
+             6. Run tests to verify
+             7. DO NOT commit (just implement and test)
+
+             Return summary: files modified, tests added, results"
+
+   Wait for agent to complete.
+
+E. Review agent result and ask about commit:
+   Show agent's output to user
+
+   AskUserQuestion:
+     "Create git commit for this fix?"
+     Options: "Yes, commit" / "No, skip commit" / "Stop workflow"
+
+   If "Yes": Create commit with descriptive message
+   If "No": skip commit, continue
+   If "Stop": end workflow
+
+F. Ask to continue:
+   AskUserQuestion:
+     "Continue to next issue?"
+     Options: "Yes" / "Pause" / "Stop"
+
+   If "Yes": loop to next issue (back to step A)
+   If "Pause" or "Stop": end workflow
 ```
 
 ## Key Rules
