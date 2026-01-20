@@ -13,7 +13,7 @@
       "name": "team-argonauts",
       "source": "./",
       "description": "Production-ready code review by a team of FAANG-level senior engineers. Argo expedition members examine failure scenarios, scalability bottlenecks, hidden edge cases, and operational complexity.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": {
         "name": "Team Argonauts",
         "email": "team-argonauts@example.com"
