@@ -1,0 +1,43 @@
+{
+  "name": "team-argonauts",
+  "owner": {
+    "name": "TGoddessana",
+    "email": "team-argonauts@example.com"
+  },
+  "metadata": {
+    "description": "Production-ready code review marketplace featuring FAANG-level senior engineer agents",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "team-argonauts",
+      "source": "./",
+      "description": "Production-ready code review by a team of FAANG-level senior engineers. Argo expedition members examine failure scenarios, scalability bottlenecks, hidden edge cases, and operational complexity.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Team Argonauts",
+        "email": "team-argonauts@example.com"
+      },
+      "homepage": "https://github.com/TGoddessana/team-argonauts",
+      "repository": "https://github.com/TGoddessana/team-argonauts.git",
+      "license": "MIT",
+      "keywords": [
+        "code-review",
+        "production-ready",
+        "senior-engineer",
+        "best-practices",
+        "faang",
+        "architecture",
+        "security",
+        "devops",
+        "qa"
+      ],
+      "category": "code-quality",
+      "tags": [
+        "review",
+        "architecture",
+        "production"
+      ]
+    }
+  ]
+}
