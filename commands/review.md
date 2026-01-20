@@ -1,26 +1,25 @@
 ---
 name: review
-description: Run a comprehensive production-ready review with the entire Argonauts team (8 senior engineers)
+description: Run a comprehensive production-ready review with the entire Argonauts team (7 senior engineers)
 argument-hint: "[file or directory path] (optional - defaults to recent changes)"
 allowed-tools: ["Read", "Grep", "Glob", "Task"]
 ---
 
 # Team Argonauts Full Review
 
-Execute a comprehensive code review using all 8 Argonauts team members. Each expert reviews from their domain perspective, providing FAANG-level production-ready feedback.
+Execute a comprehensive code review using all 7 Argonauts team members. Each expert reviews from their domain perspective, providing FAANG-level production-ready feedback.
 
 ## The Team
 
 | Agent | Role | Focus |
 |-------|------|-------|
-| Jason | Tech Lead | Architecture, trade-offs, design direction |
-| Heracles | Backend | API design, scalability, fault tolerance |
-| Hephaestus | DevOps/SRE | Deployment, monitoring, infrastructure |
-| Asclepius | QA | Test coverage, edge cases, quality |
-| Orpheus | Frontend | UX, performance, accessibility |
-| Argus | Security | Vulnerabilities, auth, data protection |
-| Athena | DBA | Query optimization, schema, indexing |
-| Calliope | Tech Writer | Documentation, naming, clarity |
+| Jason | Tech Lead/Architect | Architecture, trade-offs, design direction, orchestration |
+| Heracles | Backend Engineer | API design, scalability, fault tolerance, data modeling |
+| Orpheus | Frontend Engineer | UX, performance, accessibility, state management |
+| Argus | DevOps/SRE | Deployment, monitoring, infrastructure, CI/CD |
+| Lynceus | Security Engineer | Vulnerabilities, auth, data protection, threat modeling |
+| Atalanta | QA Engineer | Test coverage, edge cases, quality, bug hunting |
+| Calliope | Technical Writer | Documentation, naming, clarity, API docs |
 
 ## Instructions
 
@@ -32,14 +31,13 @@ Execute a comprehensive code review using all 8 Argonauts team members. Each exp
 2. **Execute Reviews in Order**
    For each relevant agent (skip agents not applicable to the code type):
 
-   a. **Jason (Tech Lead)** - Always first, sets context
-   b. **Argus (Security)** - Security issues are critical
-   c. **Heracles (Backend)** - If backend/API code exists
-   d. **Athena (DBA)** - If database/query code exists
-   e. **Orpheus (Frontend)** - If frontend code exists
-   f. **Hephaestus (DevOps)** - If infrastructure/config exists
-   g. **Asclepius (QA)** - Test coverage for all code
-   h. **Calliope (Tech Writer)** - Documentation last
+   a. **Jason (Tech Lead/Architect)** - Always first, sets context and architecture direction
+   b. **Lynceus (Security Engineer)** - Security issues are critical
+   c. **Heracles (Backend Engineer)** - If backend/API code exists
+   d. **Orpheus (Frontend Engineer)** - If frontend code exists
+   e. **Argus (DevOps/SRE)** - If infrastructure/config/deployment exists
+   f. **Atalanta (QA Engineer)** - Test coverage for all code
+   g. **Calliope (Technical Writer)** - Documentation and clarity last
 
 3. **For Each Agent Review**
    - Use the Task tool to invoke the agent
@@ -72,8 +70,8 @@ Execute a comprehensive code review using all 8 Argonauts team members. Each exp
 
 ---
 
-## 👁️ Argus (Security)
-[Argus's review output]
+## 👁️ Lynceus (Security Engineer)
+[Lynceus's review output]
 
 ---
 
@@ -96,7 +94,8 @@ Execute a comprehensive code review using all 8 Argonauts team members. Each exp
 
 ## Notes
 
-- Skip agents that aren't relevant (e.g., skip Orpheus for pure backend code)
-- Always include Jason (architecture) and Asclepius (testing)
+- Skip agents that aren't relevant (e.g., skip Orpheus for pure backend code, skip Argus if no infra changes)
+- Always include Jason (architecture) and Atalanta (testing) - they review cross-cutting concerns
+- Lynceus (security) should review any auth, input validation, or data handling code
 - Consolidate duplicate findings across agents
 - Prioritize by severity, not by agent order

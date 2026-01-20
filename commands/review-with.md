@@ -13,14 +13,13 @@ Execute a focused code review with selected Argonauts team members. Use this whe
 
 | Name | Role | Best For |
 |------|------|----------|
-| `jason` | Tech Lead | Architecture decisions, design reviews, trade-off analysis |
-| `heracles` | Backend | API design, scalability, fault tolerance, data access |
-| `hephaestus` | DevOps/SRE | Deployment, CI/CD, monitoring, infrastructure |
-| `asclepius` | QA | Test coverage, edge cases, quality standards |
-| `orpheus` | Frontend | UX, performance, accessibility, state management |
-| `argus` | Security | Vulnerabilities, auth, injection, data protection |
-| `athena` | DBA | Query optimization, schema design, indexing |
-| `calliope` | Tech Writer | Documentation, naming, code clarity |
+| `jason` | Tech Lead/Architect | Architecture decisions, design reviews, trade-off analysis, system orchestration |
+| `heracles` | Backend Engineer | API design, scalability, fault tolerance, data access, distributed systems |
+| `orpheus` | Frontend Engineer | UX, performance, accessibility, state management, component architecture |
+| `argus` | DevOps/SRE | Deployment, CI/CD, monitoring, infrastructure, operational readiness |
+| `lynceus` | Security Engineer | Vulnerabilities, auth, injection, data protection, threat modeling |
+| `atalanta` | QA Engineer | Test coverage, edge cases, quality standards, bug hunting |
+| `calliope` | Technical Writer | Documentation, naming, code clarity, API docs, README quality |
 
 ## Instructions
 
@@ -35,7 +34,7 @@ Execute a focused code review with selected Argonauts team members. Use this whe
 
 2. **Validate Agent Names**
    - If invalid name provided, list available agents and ask for correction
-   - Accept partial matches (e.g., `hera` → `heracles`)
+   - Accept partial matches (e.g., `hera` → `heracles`, `lyn` → `lynceus`, `ata` → `atalanta`)
 
 3. **Determine Review Scope**
    - If path provided, review that file/directory
@@ -94,12 +93,17 @@ Execute a focused code review with selected Argonauts team members. Use this whe
 
 **Quick security check:**
 ```
-/team-argonauts:review-with argus src/auth
+/team-argonauts:review-with lynceus src/auth
 ```
 
-**Backend + Database review:**
+**Backend + Security review:**
 ```
-/team-argonauts:review-with heracles,athena src/api/users.ts
+/team-argonauts:review-with heracles,lynceus src/api/users.ts
+```
+
+**Frontend performance review:**
+```
+/team-argonauts:review-with orpheus src/components
 ```
 
 **Architecture decision review:**
@@ -107,7 +111,17 @@ Execute a focused code review with selected Argonauts team members. Use this whe
 /team-argonauts:review-with jason
 ```
 
-**Full backend stack:**
+**Full backend stack (Architecture + Backend + Security + QA):**
 ```
-/team-argonauts:review-with jason,heracles,athena,argus,asclepius src/
+/team-argonauts:review-with jason,heracles,lynceus,atalanta src/
+```
+
+**DevOps + Security review:**
+```
+/team-argonauts:review-with argus,lynceus .github/workflows
+```
+
+**Documentation quality check:**
+```
+/team-argonauts:review-with calliope README.md
 ```
