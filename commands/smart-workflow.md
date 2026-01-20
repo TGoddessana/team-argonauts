@@ -9,7 +9,11 @@ allowed-tools: ["Read", "Grep", "Glob", "Task", "AskUserQuestion", "Write", "Tod
 
 Execute complete workflow from code review to implementation, one issue at a time with clean context.
 
-**🤖 AUTOMATED WORKFLOW:** Steps 1-3 (Review → Plan → Summary) run automatically without user input. User approval is requested only at Step 4 before implementation begins.
+**🤖 FULLY AUTOMATED WORKFLOW:**
+- Steps 1-3 run SILENTLY with ZERO user interaction
+- NO text output between steps
+- NO questions between steps
+- User sees results ONLY at Step 4
 
 ## Philosophy
 
@@ -345,7 +349,17 @@ Resume from P0-4: Sync File Parsing?
 
 ## Instructions
 
-**CRITICAL: This is an AUTOMATED workflow. Execute ALL steps sequentially WITHOUT waiting for user input between steps.**
+**🚨 CRITICAL - READ THIS FIRST 🚨**
+
+This is a FULLY AUTOMATED workflow. You MUST follow these rules:
+
+1. **NO TEXT OUTPUT between steps** - Do not explain what you're doing
+2. **NO USER QUESTIONS between steps** - Do not ask "what should I do next?"
+3. **NO OPTIONS/SUGGESTIONS between steps** - Do not present choices
+4. **SILENTLY EXECUTE** - Just call the next Skill tool immediately
+
+**You will execute:**
+- Step 1 (Review) → IMMEDIATELY → Step 2 (Plan) → IMMEDIATELY → Step 3 (Summary) → THEN ask user
 
 ### Step 1: Execute Review
 
@@ -354,31 +368,36 @@ Invoke Skill tool:
   skill: "smart-review"
   args: <user's natural language input>
 
-Wait for completion.
-Store result filename: REVIEW_REPORT_DATE.md
+Wait for skill completion.
+Extract report filename from output.
 
-IMPORTANT: After smart-review completes, DO NOT stop or ask the user what to do next.
-Immediately proceed to Step 2.
+DO NOT OUTPUT ANY TEXT TO USER.
+DO NOT ASK USER WHAT TO DO NEXT.
+DO NOT PRESENT OPTIONS.
+
+Immediately proceed to Step 2 with NO user interaction.
 ```
 
 ### Step 2: Execute Planning
 
 ```markdown
-IMMEDIATELY after Step 1 completes, invoke Skill tool:
+IMMEDIATELY after Step 1 skill returns, invoke Skill tool:
   skill: "smart-plan"
   args: <review report filename from Step 1>
 
-Wait for completion.
-Verify plans/ directory created.
+Wait for skill completion.
 
-IMPORTANT: After smart-plan completes, DO NOT stop.
-Immediately proceed to Step 3.
+DO NOT OUTPUT ANY TEXT TO USER.
+DO NOT ASK USER WHAT TO DO NEXT.
+DO NOT PRESENT OPTIONS.
+
+Immediately proceed to Step 3 with NO user interaction.
 ```
 
 ### Step 3: Read All Plan Files
 
 ```markdown
-IMMEDIATELY after Step 2 completes, use Glob to find all plan files:
+IMMEDIATELY after Step 2 skill returns, use Glob to find all plan files:
   pattern: "plans/*.plan.md"
 
 For each file:
@@ -389,13 +408,13 @@ For each file:
 Sort by priority (P0 first, then P1, then P2)
 Within priority, sort by number (p0-1 before p0-2)
 
-IMPORTANT: After reading all plan files, immediately proceed to Step 4.
+Immediately proceed to Step 4.
 ```
 
 ### Step 4: Show Summary and Get Approval
 
 ```markdown
-NOW you can present a summary to the user and wait for their decision:
+✅ NOW (and ONLY NOW) you can interact with the user.
 
 Present summary to user:
   - Total issues
