@@ -39,7 +39,6 @@ team-argonauts/
 │       └── references/
 ├── hooks/                   # Event-driven hooks
 │   └── hooks.json
-├── examples/                # Usage examples
 ├── README.md
 └── CONTRIBUTING.md
 ```
