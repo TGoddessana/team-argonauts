@@ -8,10 +8,7 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/tgoddessana/team-argonauts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tgoddessana/team-argonauts.git"
-  },
+  "repository": "https://github.com/tgoddessana/team-argonauts.git",
   "keywords": [
     "code-review",
     "production-ready",
@@ -22,8 +19,5 @@
     "security",
     "devops",
     "qa"
-  ],
-  "engines": {
-    "claude-code": ">=0.1.0"
-  }
+  ]
 }
