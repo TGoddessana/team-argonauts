@@ -29,12 +29,24 @@ The Argonauts review with:
 
 ## Installation
 
-```bash
-# From the plugin directory
-claude --plugin-dir /path/to/team-argonauts
+### From Marketplace (Recommended)
 
-# Or copy to your project
-cp -r team-argonauts /your/project/.claude-plugin/
+```bash
+# Add the marketplace
+/plugin marketplace add TGoddessana/team-argonauts
+
+# Install the plugin
+/plugin install team-argonauts@team-argonauts
+
+# Verify installation
+/plugin list
+```
+
+### Alternative: Direct Git URL
+
+```bash
+/plugin marketplace add https://github.com/TGoddessana/team-argonauts.git
+/plugin install team-argonauts@team-argonauts
 ```
 
 ## Usage
@@ -142,6 +154,35 @@ Any project-specific notes for reviewers...
 **Recommendation:** Use parameterized queries
 ...
 ```
+
+## Troubleshooting
+
+### Commands not showing up?
+
+1. Verify plugin is installed and enabled:
+   ```bash
+   /plugin list
+   ```
+
+2. Check if plugin is enabled:
+   ```bash
+   /plugin enable team-argonauts
+   ```
+
+3. Try the full command format with colon:
+   ```bash
+   /team-argonauts:review
+   ```
+   Note: Use `:` (colon), not `/` (slash) between plugin name and command!
+
+4. Restart Claude Code if needed
+
+### Getting "Command not found"?
+
+Make sure you're using the correct format:
+- ✅ Correct: `/team-argonauts:review`
+- ❌ Wrong: `/team-argonauts/review`
+- ❌ Wrong: `/team-argonauts review`
 
 ## Contributing
 
