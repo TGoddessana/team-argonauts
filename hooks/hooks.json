@@ -1,42 +1,36 @@
 {
-  "hooks": [
-    {
-      "matcher": "Stop",
-      "hooks": [
-        {
-          "type": "prompt",
-          "prompt": "Check if .claude/team-argonauts.local.md exists in the project. If it exists, read the 'auto_review' setting from its YAML frontmatter.\n\nIf auto_review is 'suggest' (default) or 'auto':\n- Look at what was just completed in this session\n- If significant code was written or modified (not just reading/exploring):\n  - If auto_review is 'suggest': Add a brief note suggesting '/team-argonauts:review' for production readiness review\n  - If auto_review is 'auto': Automatically run a quick review with relevant Argonauts (based on file types modified)\n\nIf auto_review is 'off' or the setting doesn't exist: Do nothing.\n\nKeep any suggestion brief - just one line like:\n'Tip: Run /team-argonauts:review for a production-readiness check by the Argonauts team.'"
-        }
-      ]
-    },
-    {
-      "matcher": "PreToolUse",
-      "tools": ["Write", "Edit"],
-      "hooks": [
-        {
-          "type": "prompt",
-          "prompt": "Before writing or editing code, quickly check for common security issues:\n\n1. If writing SQL queries: Ensure parameterized queries, not string concatenation\n2. If handling user input: Ensure proper validation/sanitization\n3. If dealing with auth/passwords: Ensure proper hashing (bcrypt/argon2), no plaintext\n4. If storing secrets: Ensure not hardcoded in code\n\nIf a potential security issue is detected, briefly mention it BEFORE the code change. Keep it concise - one sentence.\n\nIf no security concerns, proceed silently without mentioning this check."
-        }
-      ]
-    },
-    {
-      "matcher": "PostToolUse",
-      "tools": ["Bash"],
-      "hooks": [
-        {
-          "type": "prompt",
-          "prompt": "After executing bash commands, check if any potentially risky commands were run:\n\n- Database operations (DROP, TRUNCATE, DELETE without WHERE)\n- File deletion (rm -rf)\n- Force operations (git push --force, git reset --hard)\n- Production deployments\n- Permission changes (chmod 777)\n\nIf a risky command was executed:\n- Briefly suggest reviewing the change\n- If significant, suggest running relevant Argonauts review (e.g., /team-argonauts:security-review for db changes)\n\nKeep suggestion brief (one line). If no risky commands, do nothing."
-        }
-      ]
-    },
-    {
-      "matcher": "SessionStart",
-      "hooks": [
-        {
-          "type": "prompt",
-          "prompt": "At session start:\n\n1. Check if .claude/team-argonauts.local.md exists\n2. If exists, read project-specific settings and context\n3. If this is first time user is using Team Argonauts plugin:\n   - Briefly introduce the 7 team members (one line)\n   - Mention available commands: /review, /security-review, /backend-review, etc.\n   - Keep introduction very brief (2-3 lines max)\n\nIf user has used the plugin before (check for .claude/team-argonauts.local.md), skip introduction and load settings silently."
-        }
-      ]
-    }
-  ]
+  "Stop": {
+    "hooks": [
+      {
+        "type": "prompt",
+        "prompt": "Check if .claude/team-argonauts.local.md exists in the project. If it exists, read the 'auto_review' setting from its YAML frontmatter.\n\nIf auto_review is 'suggest' (default) or 'auto':\n- Look at what was just completed in this session\n- If significant code was written or modified (not just reading/exploring):\n  - If auto_review is 'suggest': Add a brief note suggesting '/team-argonauts:review' for production readiness review\n  - If auto_review is 'auto': Automatically run a quick review with relevant Argonauts (based on file types modified)\n\nIf auto_review is 'off' or the setting doesn't exist: Do nothing.\n\nKeep any suggestion brief - just one line like:\n'Tip: Run /team-argonauts:review for a production-readiness check by the Argonauts team.'"
+      }
+    ]
+  },
+  "PreToolUse": {
+    "tools": ["Write", "Edit"],
+    "hooks": [
+      {
+        "type": "prompt",
+        "prompt": "Before writing or editing code, quickly check for common security issues:\n\n1. If writing SQL queries: Ensure parameterized queries, not string concatenation\n2. If handling user input: Ensure proper validation/sanitization\n3. If dealing with auth/passwords: Ensure proper hashing (bcrypt/argon2), no plaintext\n4. If storing secrets: Ensure not hardcoded in code\n\nIf a potential security issue is detected, briefly mention it BEFORE the code change. Keep it concise - one sentence.\n\nIf no security concerns, proceed silently without mentioning this check."
+      }
+    ]
+  },
+  "PostToolUse": {
+    "tools": ["Bash"],
+    "hooks": [
+      {
+        "type": "prompt",
+        "prompt": "After executing bash commands, check if any potentially risky commands were run:\n\n- Database operations (DROP, TRUNCATE, DELETE without WHERE)\n- File deletion (rm -rf)\n- Force operations (git push --force, git reset --hard)\n- Production deployments\n- Permission changes (chmod 777)\n\nIf a risky command was executed:\n- Briefly suggest reviewing the change\n- If significant, suggest running relevant Argonauts review (e.g., /team-argonauts:security-review for db changes)\n\nKeep suggestion brief (one line). If no risky commands, do nothing."
+      }
+    ]
+  },
+  "SessionStart": {
+    "hooks": [
+      {
+        "type": "prompt",
+        "prompt": "At session start:\n\n1. Check if .claude/team-argonauts.local.md exists\n2. If exists, read project-specific settings and context\n3. If this is first time user is using Team Argonauts plugin:\n   - Briefly introduce the 7 team members (one line)\n   - Mention available commands: /review, /security-review, /backend-review, etc.\n   - Keep introduction very brief (2-3 lines max)\n\nIf user has used the plugin before (check for .claude/team-argonauts.local.md), skip introduction and load settings silently."
+      }
+    ]
+  }
 }
